@@ -38,3 +38,20 @@ tl2.from(".sec3h21", { yPercent: 111, opacity: 0, duration: 4 })
     .to(".bubble2", { opacity: 0, xPercent: -150, duration: 4 })
     .from(".heart", { yPercent: 120, opacity: 0, duration: 6 })
     .from(".hearth", { yPercent: 120, opacity: 0, duration: 6 })
+
+// Smooth scroll setup
+const bodyScrollBar = Scrollbar.init(document.body, { damping: 0.1, delegateTo: document });
+
+
+bodyScrollBar.setPosition(0, 0);
+bodyScrollBar.track.xAxis.element.remove();
+
+// How to get them to work together
+ScrollTrigger.scrollerProxy("body", {
+    scrollTop(value) {
+        if (arguments.length) {
+            bodyScrollBar.scrollTop = value;
+        }
+        return bodyScrollBar.scrollTop;
+    }
+});
